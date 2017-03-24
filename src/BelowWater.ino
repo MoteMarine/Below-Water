@@ -25,7 +25,9 @@ void loop() {
   If the numberOfReadings value is less than 1 it's assigned to 1 to prevent
   Nan results in the case of config failure.
   */
-
+  while(!Serial.available()){
+     delay(1000);
+  }
   if ((char)Serial.read() == 't') {
     int numberOfReadings = (Serial.readStringUntil('z')).toInt();
     double temperatureReading = averageValues(numberOfReadings <= 0 ? 1 : numberOfReadings );
